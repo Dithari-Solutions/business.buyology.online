@@ -15,7 +15,7 @@ Set `NEXT_PUBLIC_API_BASE_URL` before building if the API is not `https://api.bu
 
 ## Form
 
-The qualification questions come from `Buyology_Stockist_Partner_Quick_Qualification_Form.docx`. Its final confirmation section is incorporated into step 5 to preserve the requested five-step flow. Email is added as a required contact field for the confirmation email. Website/social media is optional. Every Yes/No answer is required, and No is a valid answer. Investment requires one selection; preferred partnership permits one or more selections, matching the document's checkboxes. Forms stay in memory; a refresh discards an unsubmitted application.
+The qualification questions come from `Buyology_Stockist_Partner_Quick_Qualification_Form.docx`. Its final confirmation section is incorporated into step 5 to preserve the requested five-step flow. Email is added as a required contact field for the confirmation email. Website/social media is optional. Every Yes/No answer is required, and No is a valid answer. Investment requires one selection; preferred partnership requires exactly one selection. Forms stay in memory; a refresh discards an unsubmitted application.
 
 Client and backend validate all required answers. Requests use a UUID reference to make retries of the same submission idempotent. A response containing the saved request ID is required before displaying success. No application data is saved in browser storage.
 
