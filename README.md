@@ -42,3 +42,23 @@ The dashboard sidebar has **Partnership requests** at `/partnership-requests`. I
 5. Submit an authorized test application and verify the database record, dashboard detail, and actual confirmation receipt. Local checks mock email delivery and do not send to applicants.
 
 SEO includes route-specific titles/descriptions, canonical URLs, Open Graph and Twitter metadata, Organization JSON-LD, sitemap and robots files. Canonical URLs target the requested production domain; a private hosted preview is not intended for indexing.
+
+## Static serving with PM2
+
+Use `deploy/serve-config.json` with the `serve` static server. `cleanUrls` must be enabled so `/` and `/become-partner/` resolve to their exported `index.html` files. Disabling it while directory listings are disabled returns the exported Next.js 404 page on direct visits.
+
+For an existing PM2 deployment created with a root-level `serve-config.json`:
+
+```sh
+cp deploy/serve-config.json serve-config.json
+pm2 restart business.buyology.online
+```
+
+For a new deployment after building (with `pm2` and `serve` installed):
+
+```sh
+pm2 start "$(command -v serve)" --name business.buyology.online --cwd "$PWD" -- out --listen tcp://127.0.0.1:9999 --config "$PWD/deploy/serve-config.json"
+pm2 save
+```
+
+Nginx can proxy requests unchanged to `http://127.0.0.1:9999`. Check both the homepage and `/become-partner/` with a direct request after deployment.
