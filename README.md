@@ -11,7 +11,7 @@ npm run dev
 
 Development uses Webpack, matching the production build, to avoid Turbopack persistence errors on external macOS drives.
 
-The two public routes are `/` and `/become-partner/`. `npm run build` generates a static export in `out/`. The site reuses the v2 Buyology logos, Raleway font and brand palette (#FFBE12, #402F75, black and white). The laptop illustration is an existing v2 asset.
+The two public routes are `/` and `/become-partner/`. `npm run build` generates a static export in `out/`. The site reuses the v2 Buyology logos, self-hosted Manrope (headings) and Inter (body and forms) fonts and brand palette (#FFBE12, #402F75, black and white). The laptop illustration is an existing v2 asset.
 
 Set `NEXT_PUBLIC_API_BASE_URL` before building if the API is not `https://api.buyology.online`. This is a public URL, never a secret. Local submissions require the backend running, with the site's local origin included in `CORS_ALLOWED_ORIGINS`.
 
