@@ -20,9 +20,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <a className="skip-link" href="#main">Skip to content</a>
     <header className="site-header"><div className="container header-inner">
       <Link className="brand" href="/" aria-label="Buyology Business home"><Image src="/logo-light.png" alt="Buyology" width={190} height={42} priority /><span>BUSINESS</span></Link>
-      <nav aria-label="Main navigation"><Link href="/">Home</Link><Link className="button small header-apply" href="/become-partner/">Apply for partnership</Link></nav>
     </div></header>
     <main id="main">{children}</main>
-    <footer><div className="container footer-inner"><div><Image src="/logo.png" alt="Buyology" width={180} height={40} /><p>Buy the why. Build what’s next.</p></div><div><Link href="/become-partner/">Apply for partnership</Link><a href="https://buyology.online">Visit Buyology store</a><a href="mailto:support@buyology.online">support@buyology.online</a></div></div><div className="container footer-bottom">© {new Date().getFullYear()} Buyology. All rights reserved.<span>Stockist · Retail · B2B Distribution</span></div></footer>
+    <footer><div className="container footer-inner"><div><Image src="/logo.png" alt="Buyology" width={180} height={40} /><p>Buy the why. Build what’s next.</p></div><div><a href="https://buyology.online">Visit Buyology store</a><a href="mailto:support@buyology.online">support@buyology.online</a></div></div><div className="container footer-bottom">© {new Date().getFullYear()} Buyology. All rights reserved.<span>Stockist · Retail · B2B Distribution</span></div></footer>
   </body></html>;
 }

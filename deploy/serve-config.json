@@ -1,5 +1,17 @@
 {
   "cleanUrls": true,
   "trailingSlash": true,
-  "directoryListing": false
+  "directoryListing": false,
+  "redirects": [
+    {
+      "source": "/become-partner",
+      "destination": "/",
+      "type": 301
+    },
+    {
+      "source": "/become-partner/",
+      "destination": "/",
+      "type": 301
+    }
+  ]
 }

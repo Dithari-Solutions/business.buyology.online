@@ -11,7 +11,7 @@ npm run dev
 
 Development uses Webpack, matching the production build, to avoid Turbopack persistence errors on external macOS drives.
 
-The two public routes are `/` and `/become-partner/`. `npm run build` generates a static export in `out/`. The site reuses the v2 Buyology logos, self-hosted Manrope (headings) and Inter (body and forms) fonts and brand palette (#FFBE12, #402F75, black and white). The laptop illustration is an existing v2 asset.
+The website opens the partnership form directly at `/`. The former `/become-partner/` URL redirects to `/` through the static server configuration. `npm run build` generates a static export in `out/`. The site reuses the v2 Buyology logos, self-hosted Manrope (headings) and Inter (body and forms) fonts and brand palette (#FFBE12, #402F75, black and white).
 
 Set `NEXT_PUBLIC_API_BASE_URL` before building if the API is not `https://api.buyology.online`. This is a public URL, never a secret. Local submissions require the backend running, with the site's local origin included in `CORS_ALLOWED_ORIGINS`.
 
@@ -37,7 +37,7 @@ The dashboard sidebar has **Partnership requests** at `/partnership-requests`. I
 
 1. Deploy the backend changes first; Flyway runs migration V63. Retain the existing SendGrid configuration. No new email credentials are required.
 2. Deploy the dashboard changes so reviewers can access Partnership requests.
-3. Build and host this project's `out/` directory. Configure the host to serve `/become-partner/index.html` for `/become-partner/` rather than an SPA fallback.
+3. Build and host this project's `out/` directory. Use `deploy/serve-config.json` so the former application URL redirects to `/`.
 4. Route `business.buyology.online` to the chosen host and verify TLS. Its origin is included in the backend CORS allowlist. A preview origin must be explicitly added to `CORS_ALLOWED_ORIGINS` if preview submissions are needed.
 5. Submit an authorized test application and verify the database record, dashboard detail, and actual confirmation receipt. Local checks mock email delivery and do not send to applicants.
 
@@ -45,7 +45,7 @@ SEO includes route-specific titles/descriptions, canonical URLs, Open Graph and 
 
 ## Static serving with PM2
 
-Use `deploy/serve-config.json` with the `serve` static server. `cleanUrls` must be enabled so `/` and `/become-partner/` resolve to their exported `index.html` files. Disabling it while directory listings are disabled returns the exported Next.js 404 page on direct visits.
+Use `deploy/serve-config.json` with the `serve` static server. `cleanUrls` must be enabled so `/` resolves to its exported `index.html` file. Disabling it while directory listings are disabled returns the exported Next.js 404 page on direct visits.
 
 For an existing PM2 deployment created with a root-level `serve-config.json`:
 
@@ -61,4 +61,4 @@ pm2 start "$(command -v serve)" --name business.buyology.online --cwd "$PWD" -- 
 pm2 save
 ```
 
-Nginx can proxy requests unchanged to `http://127.0.0.1:9999`. Check both the homepage and `/become-partner/` with a direct request after deployment.
+Nginx can proxy requests unchanged to `http://127.0.0.1:9999`. Check that `/` opens the form and `/become-partner/` redirects to `/` after deployment.
